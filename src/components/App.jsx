@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
+
 import axios from 'axios';
 // import css from './App.module.css';
-import { Header } from './Header/Header';
+import { Route, Routes } from 'react-router-dom';
+// import { Header } from './Header/Header';
 import { TrendingToday } from './TrendingToday/TrendingToday';
 
 export const App = () => {
-
   const [trendingMovies, setTrendingMovies] = useState(null);
-  const [status, setStatus] = useState('idle');
+  // const [status, setStatus] = useState('idle');
   const [error, setError] = useState(null);
 
   async function fetchTrending() {
@@ -20,17 +21,17 @@ export const App = () => {
           api_key,
         },
       });
-     console.log(result.data.results);
-    const movies = result.data.results;
+      console.log(result.data.results);
+      const movies = result.data.results;
       if (movies.length > 0) {
         setTrendingMovies(movies);
-        console.log('resolved');
-        setStatus('resolved');
+        // console.log('resolved');
+        // setStatus('resolved');
       } else {
-        setStatus('rejected');
+        // setStatus('rejected');
       }
     } catch (er) {
-      setStatus('rejected');
+      // setStatus('rejected');
       setError(er.message);
       console.log(error);
       throw new Error();
@@ -42,11 +43,11 @@ export const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
   return (
-    <div>
-      <Header/>
-      {trendingMovies ? <TrendingToday trendingMovies={trendingMovies}/> : ''}
-    </div>
+    
+      <Routes>
+        <Route path="/" element={<TrendingToday trendingMovies={trendingMovies} />}/>
+      </Routes>
+   
   );
 };
