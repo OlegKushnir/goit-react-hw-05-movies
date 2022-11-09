@@ -5,14 +5,15 @@ import axios from 'axios';
 import { Route, Routes } from 'react-router-dom';
 // import { Header } from './Header/Header';
 import { TrendingToday } from './TrendingToday/TrendingToday';
+import { TrendingTodayItem } from './TrendingToday/TrendingTodayItem';
+import { AppBar } from './AppBar/AppBar';
 
 export const App = () => {
   const [trendingMovies, setTrendingMovies] = useState(null);
-  // const [status, setStatus] = useState('idle');
   const [error, setError] = useState(null);
+  const [movieDetails, setMovieDetails] = useState(null);
 
   async function fetchTrending() {
-    // setStatus('pending');
     const api_key = 'e3c158ab405aa7844dcf81b819b98dcd';
     axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
     try {
@@ -21,17 +22,32 @@ export const App = () => {
           api_key,
         },
       });
-      console.log(result.data.results);
       const movies = result.data.results;
       if (movies.length > 0) {
         setTrendingMovies(movies);
-        // console.log('resolved');
-        // setStatus('resolved');
-      } else {
-        // setStatus('rejected');
       }
     } catch (er) {
-      // setStatus('rejected');
+      setError(er.message);
+      console.log(error);
+      throw new Error();
+    }
+  }
+
+  async function fetchMovie(id) {
+    const api_key = 'e3c158ab405aa7844dcf81b819b98dcd';
+    axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
+    try {
+      const result = await axios.get(`movie/${id}`, {
+        params: {
+          api_key,
+        },
+      });
+      console.log(result);
+      // const movies = result.data.results;
+      // if (movies.length > 0) {
+      //   setMovieDetails(movies);
+      // }
+    } catch (er) {
       setError(er.message);
       console.log(error);
       throw new Error();
@@ -46,8 +62,15 @@ export const App = () => {
   return (
     
       <Routes>
-        <Route path="/" element={<TrendingToday trendingMovies={trendingMovies} />}/>
+        <Route path="/" element={<AppBar/>}>
+          <Route path='movies'>
+           { movieDetails.id && <Route path={movieDetails.id} element={<TrendingTodayItem id={movieDetails.id}/>}/>}
+        </Route>
+      </Route>
       </Routes>
-   
+    
   );
 };
+
+
+// {id ? <Route path={id} element={<TrendingTodayItem id={id} /> } /> : ''}

@@ -1,3 +1,5 @@
-export const TrendingTodayItem = ({title}) => {
+import { useState, useEffect } from 'react';
+export const TrendingTodayItem = ({title,id}) => {
+    
     return <li>{title}</li>
 }
