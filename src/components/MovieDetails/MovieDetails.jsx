@@ -18,7 +18,6 @@ export const MovieDetails = () => {
           api_key,
         },
       });
-      console.log('result', result.data);
       if (result.data) {
         setMovieDetails(result.data);
       }

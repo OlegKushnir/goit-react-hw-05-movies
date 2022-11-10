@@ -25,9 +25,7 @@ export const SearchMovies = () => {
         },
       });
       const movies = result.data.results;
-      console.log('movies',movies);
       if (movies.length > 0) {
-        console.log('Adding movies');
         setSearchedMovies(movies);
       }
     }
@@ -39,7 +37,6 @@ export const SearchMovies = () => {
   useEffect(() => {
     if (search) {
       fetchSearchedMovie(search);
-      console.log('search',search);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);

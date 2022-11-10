@@ -44,7 +44,6 @@ export const Cast = () => {
           <li key={id}>
             <img src={'https://image.tmdb.org/t/p/w200'+profile_path} alt="" />
             <p>{name}</p>
-            
             <p>Character: {character}</p>
           </li>
         ))}
