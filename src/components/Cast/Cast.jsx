@@ -31,6 +31,7 @@ export const Cast = () => {
 
   useEffect(() => {
     fetchMovieCast(movieId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!cast) return null;
