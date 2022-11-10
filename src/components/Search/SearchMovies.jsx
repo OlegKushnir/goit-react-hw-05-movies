@@ -5,7 +5,7 @@ import { SearchBox } from './SearchBox';
 import { SearchResult } from './SearchResult';
 
 
-export const SearchMovies = () => {
+ const SearchMovies = () => {
   const [searchedMovies,setSearchedMovies] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get('query') ?? '';
@@ -41,8 +41,6 @@ export const SearchMovies = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
- 
-
   return (
     <>
       <SearchBox getValue={getValue} />
@@ -50,3 +48,5 @@ export const SearchMovies = () => {
     </>
   );
 };
+
+export default SearchMovies;

@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy } from 'react';
 import axios from 'axios';
 import { Route, Routes } from 'react-router-dom';
-import { TrendingToday } from './TrendingToday/TrendingToday';
-import { SearchMovies } from './Search/SearchMovies';
 import { Home } from './Home/Home';
 import { MovieDetails } from './MovieDetails/MovieDetails';
 import { Cast } from './Cast/Cast';
 import { Reviews } from './Reviews/Reviews';
+
+const TrendingToday = lazy(()=>import('../components/TrendingToday/TrendingToday'))
+const SearchMovies = lazy(()=>import('../components/Search/SearchMovies'))
 
 export const App = () => {
   const [trendingMovies, setTrendingMovies] = useState(null);

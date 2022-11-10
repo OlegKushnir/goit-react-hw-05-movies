@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-export const TrendingToday = ({ trendingMovies }) => {
+const TrendingToday = ({ trendingMovies }) => {
   const location = useLocation();
   if (!trendingMovies) return;
   return (
@@ -18,6 +18,7 @@ export const TrendingToday = ({ trendingMovies }) => {
     </>
   );
 };
+export default TrendingToday;
 TrendingToday.propTypes = {
   trendingMovies: PropTypes.arrayOf(
     PropTypes.PropTypes.shape({
