@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
-import { SearchBox } from './SearchBox';
-import { SearchResult } from './SearchResult';
+import { SearchBox } from '../Search/SearchBox';
+import { SearchResult } from '../Search/SearchResult';
 
 
- const SearchMovies = () => {
+ const Movies = () => {
   const [searchedMovies,setSearchedMovies] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get('query') ?? '';
@@ -49,4 +49,4 @@ import { SearchResult } from './SearchResult';
   );
 };
 
-export default SearchMovies;
+export default Movies;

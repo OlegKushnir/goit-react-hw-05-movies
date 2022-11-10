@@ -7,7 +7,7 @@ import { Cast } from './Cast/Cast';
 import { Reviews } from './Reviews/Reviews';
 
 const TrendingToday = lazy(()=>import('../components/TrendingToday/TrendingToday'))
-const SearchMovies = lazy(()=>import('../components/Search/SearchMovies'))
+const Movies = lazy(()=>import('./Movies/Movies'))
 
 export const App = () => {
   const [trendingMovies, setTrendingMovies] = useState(null);
@@ -45,7 +45,7 @@ export const App = () => {
           index
           element={<TrendingToday trendingMovies={trendingMovies} />}
         />
-        <Route path="/movies" element={<SearchMovies/>}>
+        <Route path="/movies" element={<Movies/>}>
         </Route>
         <Route path="/:movieId" element={<MovieDetails />}>
           <Route path="/:movieId/cast" element={<Cast />} />
