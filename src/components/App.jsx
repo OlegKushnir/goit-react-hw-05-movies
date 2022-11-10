@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react';
-
 import axios from 'axios';
-// import css from './App.module.css';
 import { Route, Routes } from 'react-router-dom';
-// import { Header } from './Header/Header';
 import { TrendingToday } from './TrendingToday/TrendingToday';
-import { TrendingTodayItem } from './TrendingToday/TrendingTodayItem';
-import { AppBar } from './AppBar/AppBar';
+import { SearchMovies } from './Search/SearchMovies';
+import { Home } from './Home/Home';
+import { MovieDetails } from './MovieDetails/MovieDetails';
+import { Cast } from './Cast/Cast';
+import { Reviews } from './Reviews/Reviews';
 
 export const App = () => {
   const [trendingMovies, setTrendingMovies] = useState(null);
   const [error, setError] = useState(null);
-  const [movieDetails, setMovieDetails] = useState(null);
 
   async function fetchTrending() {
     const api_key = 'e3c158ab405aa7844dcf81b819b98dcd';
@@ -33,44 +32,26 @@ export const App = () => {
     }
   }
 
-  async function fetchMovie(id) {
-    const api_key = 'e3c158ab405aa7844dcf81b819b98dcd';
-    axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
-    try {
-      const result = await axios.get(`movie/${id}`, {
-        params: {
-          api_key,
-        },
-      });
-      console.log(result);
-      // const movies = result.data.results;
-      // if (movies.length > 0) {
-      //   setMovieDetails(movies);
-      // }
-    } catch (er) {
-      setError(er.message);
-      console.log(error);
-      throw new Error();
-    }
-  }
-
   useEffect(() => {
     fetchTrending();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    
-      <Routes>
-        <Route path="/" element={<AppBar/>}>
-          <Route path='movies'>
-           { movieDetails.id && <Route path={movieDetails.id} element={<TrendingTodayItem id={movieDetails.id}/>}/>}
+    <Routes>
+      <Route path="/" element={<Home />}>
+        <Route
+          index
+          element={<TrendingToday trendingMovies={trendingMovies} />}
+        />
+        <Route path="/movies" element={<SearchMovies/>}>
+        </Route>
+        <Route path="/:movieId" element={<MovieDetails />}>
+          <Route path="/:movieId/cast" element={<Cast />} />
+          <Route path="/:movieId/reviews" element={<Reviews />} />
         </Route>
       </Route>
-      </Routes>
-    
+    </Routes>
   );
 };
 
-
-// {id ? <Route path={id} element={<TrendingTodayItem id={id} /> } /> : ''}

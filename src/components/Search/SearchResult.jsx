@@ -1,12 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
-export const TrendingToday = ({ trendingMovies }) => {
+export const SearchResult = ({ searchedMovies }) => {
   const location = useLocation();
-  if (!trendingMovies) return;
   return (
     <>
-      <h1>Trending Today</h1>
       <ul>
-        {trendingMovies.map(({ id, title }) => (
+        {searchedMovies.map(({ id, title }) => (
           <li key={id}>
             <Link to={`/${id}`} state={{ from: location }}>
               {title}

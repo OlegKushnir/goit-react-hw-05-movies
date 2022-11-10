@@ -1,10 +1,12 @@
-import css from './Header.module.css';
-import { Link } from 'react-router-dom';
+import css from './AppBar.module.css';
+import { Link, NavLink} from 'react-router-dom';
 export const AppBar = () => {
   return (
+    
     <header className={css.header}>
-      <Link to="/">Home</Link>
-      <Link to="movies">Movies</Link>
+      <NavLink to="/" className={css.home}>Home</NavLink>
+      <NavLink to="movies" className={css.home}>Movies</NavLink>
     </header>
+  
   );
 };

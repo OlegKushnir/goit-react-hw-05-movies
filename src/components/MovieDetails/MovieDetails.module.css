@@ -1,0 +1,19 @@
+.wrapper {
+    display: flex;
+    gap: 30px;
+}
+.goBack {
+    display: block;
+    width: 70px;
+    height: 20px;
+    font-weight: 500;
+    border-radius: 4px;
+    text-align: center;
+    background-color: antiquewhite;
+    box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.55);
+}
+.aditional {
+    margin-top: 10px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
