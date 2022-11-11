@@ -1,8 +1,18 @@
 import { Link, useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
-const TrendingToday = ({ trendingMovies }) => {
+import { useState, useEffect} from 'react';
+import { fetchTrending } from 'backend/backend';
+
+const TrendingToday = () => {
   const location = useLocation();
+  const [trendingMovies, setTrendingMovies] = useState(null);
+
+  useEffect(() => {
+    fetchTrending().then(movies=>setTrendingMovies(movies));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   if (!trendingMovies) return;
+
   return (
     <>
       <h1>Trending Today</h1>
@@ -19,11 +29,3 @@ const TrendingToday = ({ trendingMovies }) => {
   );
 };
 export default TrendingToday;
-TrendingToday.propTypes = {
-  trendingMovies: PropTypes.arrayOf(
-    PropTypes.PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
-};

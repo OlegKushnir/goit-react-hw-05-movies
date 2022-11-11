@@ -1,34 +1,18 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import css from './MovieDetails.module.css';
 import { Link, Outlet, useParams, useLocation, NavLink } from 'react-router-dom';
-import axios from 'axios';
-
-export const MovieDetails = () => {
+import { fetchMovieById } from 'backend/backend';
+ const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const { movieId } = useParams();
   const location = useLocation();
-
-  async function fetchMovieById(id) {
-    const api_key = 'e3c158ab405aa7844dcf81b819b98dcd';
-    axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
-    try {
-      const result = await axios.get(`movie/${id}`, {
-        params: {
-          api_key,
-        },
-      });
-      if (result.data) {
-        setMovieDetails(result.data);
-      }
-    } catch (er) {
-      console.log(er.message);
-      throw new Error();
-    }
-  }
-
+  const memoizedLoc = useMemo(
+    ()=>location,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [movieId]
+  );
   useEffect(() => {
-    fetchMovieById(movieId);
+    fetchMovieById(movieId).then(movie=>setMovieDetails(movie));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -39,11 +23,11 @@ export const MovieDetails = () => {
   return (
     <>
       <p>
-        <NavLink to={location.state?.from ?? '/movies'} className={css.goBack}>Go back</NavLink>
+        <NavLink to={memoizedLoc.state?.from ?? '/movies'} className={css.goBack}>Go back</NavLink>
       </p>
       <div className={css.wrapper}>
         <div>
-          <img src={'https://image.tmdb.org/t/p/w300' + poster_path} alt="" />
+          <img src={poster_path && 'https://image.tmdb.org/t/p/w300' + poster_path} alt="" />
         </div>
         <div>
           <h1>{original_title}</h1>
@@ -69,3 +53,4 @@ export const MovieDetails = () => {
     </>
   );
 };
+export default MovieDetails;

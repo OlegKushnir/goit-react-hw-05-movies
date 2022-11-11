@@ -2,7 +2,7 @@ import css from './Home.module.css';
 import { AppBar } from 'components/AppBar/AppBar';
 import { Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
-export const Home = () => {
+const Home = () => {
   return (
     <>
       <AppBar />
@@ -14,3 +14,4 @@ export const Home = () => {
     </>
   );
 };
+export default Home;
