@@ -17,6 +17,7 @@ import { fetchMovieRewiews } from 'backend/backend';
 
   return (
     <>
+    <h2>Reviews</h2>
       <ul className={css.reviewsList}>
         {reviews.length > 0 ? (
           reviews.map(({ author, content, id }) => (
